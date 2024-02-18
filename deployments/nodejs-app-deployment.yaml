@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nodejs-app-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: k8s-nodejs-app
+  template:
+    metadata:
+      labels:
+        app: k8s-nodejs-app
+    spec:
+      containers:
+        - name: k8s-nodejs-app
+          image: mkiran715/nodejs-app:latest
+          ports:
+            - containerPort: 3000
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
